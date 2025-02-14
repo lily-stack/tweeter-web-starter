@@ -10,18 +10,18 @@ export class LoginUrlPresenter extends LoginPresenter {
     }
 
     public async doLogin () {
-        try {
-          const [user, authToken] = await this.userService.login(
-            this.view.alias, 
-            this.view.password
-          );
-    
-          this.view.updateUserInfo(user, user, authToken, this.view.rememberMe);
-          this.navigate(this.view.originalUrl!);
-        } catch (error) {
-          this.view.displayErrorMessage(
-            `Failed to log user in because of exception: ${error}`
-          );
-        }
-    };
+      try {
+        const [user, authToken] = await this.userService.login(
+          this.view.alias, 
+          this.view.password
+        );
+  
+        this.view.updateUserInfo(user, user, authToken, this.view.rememberMe);
+        this.navigate(this.view.originalUrl!);
+      } catch (error) {
+        this.view.displayErrorMessage(
+          `Failed to log user in because of exception: ${error}`
+        );
+      }
+  };
 }

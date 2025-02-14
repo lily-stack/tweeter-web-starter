@@ -9,7 +9,7 @@ export interface LoginView {
         rememberMe: boolean
     ) => void
     displayErrorMessage: (message: string) => void
-    originalUrl: string | undefined
+    originalUrl: string | undefined;
     alias: string;
     password: string;
     rememberMe: boolean;
