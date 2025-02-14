@@ -17,6 +17,9 @@ import userInfoHook from "./components/userInfo/UserInfoHook";
 import { FolloweePresenter } from "./presenters/FolloweePresenter";
 import { UserItemView } from "./presenters/UserItemPresenter";
 import { FollowerPresenter } from "./presenters/FollowerPresenter";
+import { StatusItemView } from "./presenters/StatusItemPresenter";
+import { FeedPresenter } from "./presenters/FeedPresenter";
+import { StoryPresenter } from "./presenters/StoryPresenter";
 
 const App = () => {
   const { currentUser, authToken } = userInfoHook();
@@ -46,13 +49,29 @@ const AuthenticatedRoutes = () => {
     <Routes>
       <Route element={<MainLayout />}>
         <Route index element={<Navigate to="/feed" />} />
-        <Route path="feed" element={<StatusItemScroller item = "feed" />} />
-        <Route path="story" element={<StatusItemScroller item = "story" />} />
+        <Route 
+          path="feed" 
+          element={
+            <StatusItemScroller 
+              key={1}
+              presenterGenerator={(view: StatusItemView) => new FeedPresenter(view)} 
+            />
+          } 
+        />
+        <Route 
+          path="story" 
+          element={
+            <StatusItemScroller 
+              key={2}
+              presenterGenerator={(view: StatusItemView) => new StoryPresenter(view)} 
+            />
+          } 
+        />
         <Route
           path="followees"
           element={
             <UserItemScroller
-              key={1}
+              key={3}
               presenterGenerator= {(view: UserItemView) => new FolloweePresenter(view)}
             />
           }
@@ -61,7 +80,7 @@ const AuthenticatedRoutes = () => {
           path="followers"
           element={
             <UserItemScroller
-              key={2} 
+              key={4} 
               presenterGenerator= {(view: UserItemView) => new FollowerPresenter(view)}
             />
           }
