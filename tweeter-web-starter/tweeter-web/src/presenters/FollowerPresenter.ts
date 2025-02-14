@@ -8,19 +8,18 @@ export class FollowerPresenter extends UserItemPresenter{
     private followService: FollowService;
     
     public constructor(view: UserItemView) {
-        super(view)
-        this.followService = new FollowService();
+      super(view)
+      this.followService = new FollowService();
     }
 
     public async loadMoreItems(authToken: AuthToken, userAlias: string) {
         try {
-
-            const [newItems, hasMore] = await this.followService.loadMoreFollowers(
-                authToken,
-                userAlias,
-                PAGE_SIZE,
-                this.lastItem
-            );
+          const [newItems, hasMore] = await this.followService.loadMoreFollowers(
+              authToken,
+              userAlias,
+              PAGE_SIZE,
+              this.lastItem
+          );
     
           this.hasMoreItems = hasMore;
           this.lastItem = newItems[newItems.length - 1];
