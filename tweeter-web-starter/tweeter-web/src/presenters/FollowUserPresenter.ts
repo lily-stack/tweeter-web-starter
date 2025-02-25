@@ -12,9 +12,8 @@ export class FollowUserPresenter extends DisplayUserPresenter {
 
     public async updateDisplayUser(event: React.MouseEvent, authToken: AuthToken, displayedUser: User | null): Promise<void> {
         event.preventDefault();
-
-        try {
-            this.view.setIsLoading(true);
+        this.doFailureReportingOperation( async () => {
+          this.view.setIsLoading(true);
             this.view.displayInfoMessage(`Following ${displayedUser!.name}...`, 0);
       
             const [followerCount, followeeCount] = await this.followService.follow(
@@ -25,14 +24,9 @@ export class FollowUserPresenter extends DisplayUserPresenter {
             this.view.setIsFollower(true);
             this.view.setFollowerCount(followerCount);
             this.view.setFolloweeCount(followeeCount);
-          } catch (error) {
-            this.view.displayErrorMessage(
-              `Failed to follow user because of exception: ${error}`
-            );
-          } finally {
-            this.view.clearLastInfoMessage();
-            this.view.setIsLoading(false);
-          }
-        };
+        }, "follow user");
+        this.view.clearLastInfoMessage();
+        this.view.setIsLoading(false);
+      };
     
 }

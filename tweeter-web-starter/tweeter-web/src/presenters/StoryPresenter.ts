@@ -1,10 +1,21 @@
 import { StatusItemPresenter, StatusItemView } from "./StatusItemPresenter";
 import { StatusService } from "../model/service/StatusService";
-import { AuthToken } from "tweeter-shared";
+import { AuthToken, Status } from "tweeter-shared";
+import { PAGE_SIZE } from "./PagedItemPresenter";
 
-export const PAGE_SIZE = 10;
 
 export class StoryPresenter extends StatusItemPresenter {
+    protected getMoreItems(authToken: AuthToken, userAlias: string): Promise<[Status[], boolean]> {
+      return this.statusService.loadMoreStoryItems(
+        authToken,
+        userAlias,
+        PAGE_SIZE,
+        this.lastItem
+      );
+    }
+    protected getItemDescription(): string {
+      return "load story items";
+    }
 
     private statusService: StatusService;
 
@@ -12,23 +23,4 @@ export class StoryPresenter extends StatusItemPresenter {
         super(view);
         this.statusService =  new StatusService(); 
     }
-
-    public async loadMoreItems(authToken: AuthToken, userAlias: string) {
-        try {
-          const [newItems, hasMore] = await this.statusService.loadMoreStoryItems(
-            authToken,
-            userAlias,
-            PAGE_SIZE,
-            this.lastItem
-          );
-    
-          this.hasMoreItems = hasMore;
-          this.lastItem = newItems[newItems.length - 1];
-          this.view.addItems(newItems);
-        } catch (error) {
-          this.view.displayErrorMessage(
-            `Failed to load story items because of exception: ${error}`
-          );
-        }
-    };
 }

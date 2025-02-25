@@ -1,23 +1,21 @@
 import { AuthToken, User } from "tweeter-shared";
+import { Presenter, MessageView } from "./Presenter";
 
-export interface DisplayUserView {
+export interface DisplayUserView extends MessageView{
     setIsLoading: (value: React.SetStateAction<boolean>) => void;
-    displayInfoMessage: (message: string, duration: number, bootstrapClasses?: string) => void;
     setIsFollower: (value: React.SetStateAction<boolean>) => void;
     setFollowerCount: (value: React.SetStateAction<number>) => void;
     setFolloweeCount: (value: React.SetStateAction<number>) => void;
-    displayErrorMessage: (message: string, bootstrapClasses?: string) => void;
-    clearLastInfoMessage: () => void;
 }
 
-export abstract class DisplayUserPresenter {
-    private _view: DisplayUserView;
+export abstract class DisplayUserPresenter extends Presenter {
 
     public constructor (view: DisplayUserView) {
-        this._view = view;
+        super(view);
     }
-    protected get view() {
-        return this._view;
+
+    public get view(): DisplayUserView {
+        return super.view as DisplayUserView;
     }
 
     public abstract updateDisplayUser(

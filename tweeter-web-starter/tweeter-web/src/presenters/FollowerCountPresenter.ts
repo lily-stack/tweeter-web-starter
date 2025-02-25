@@ -1,30 +1,30 @@
 import { AuthToken, User } from "tweeter-shared";
 import { FollowService } from "../model/service/FollowService";
+import { Presenter, View } from "./Presenter";
 
-export interface FollowerCountView {
+export interface FollowerCountView extends View{
     setFollowerCount: (value: React.SetStateAction<number>) => void;
     displayErrorMessage: (message: string, bootstrapClasses?: string) => void;
 }
 
-export class FollowerCountPresenter {
-    private view: FollowerCountView;
+export class FollowerCountPresenter extends Presenter {
     private followService: FollowService;
 
     public constructor(view: FollowerCountView) {
-        this.view = view;
+        super(view);
         this.followService = new FollowService();
+    }
+
+    public get view(): FollowerCountView {
+      return super.view as FollowerCountView;
     }
 
     public async setNumbFollowers (
         authToken: AuthToken,
         displayedUser: User
       ) {
-        try {
+        this.doFailureReportingOperation( async () => {
           this.view.setFollowerCount(await this.followService.getFollowerCount(authToken, displayedUser));
-        } catch (error) {
-          this.view.displayErrorMessage(
-            `Failed to get followers count because of exception: ${error}`
-          );
-        }
+        }, "get followers count");
       };
 }
