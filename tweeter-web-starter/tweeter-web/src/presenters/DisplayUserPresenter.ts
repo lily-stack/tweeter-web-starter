@@ -8,14 +8,10 @@ export interface DisplayUserView extends MessageView{
     setFolloweeCount: (value: React.SetStateAction<number>) => void;
 }
 
-export abstract class DisplayUserPresenter extends Presenter {
+export abstract class DisplayUserPresenter extends Presenter<DisplayUserView> {
 
     public constructor (view: DisplayUserView) {
         super(view);
-    }
-
-    public get view(): DisplayUserView {
-        return super.view as DisplayUserView;
     }
 
     public abstract updateDisplayUser(

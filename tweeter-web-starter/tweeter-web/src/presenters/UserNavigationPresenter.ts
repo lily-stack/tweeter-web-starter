@@ -5,17 +5,13 @@ import { Presenter, View } from "./Presenter";
 export interface UserNavigationView extends View {
     setDisplayedUser: (user: User) => void; 
 }
-export class UserNavigationPresenter extends Presenter {
+export class UserNavigationPresenter extends Presenter<UserNavigationView> {
     private userService: UserService;
 
     public constructor(view: UserNavigationView) {
         super(view);
         this.userService = new UserService();
     }
-
-    public get view(): UserNavigationView {
-        return super.view as UserNavigationView;
-      }
 
     public async navigateToUser (
         event: React.MouseEvent,

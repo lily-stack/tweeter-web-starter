@@ -5,16 +5,12 @@ import { Presenter, MessageView } from "./Presenter";
 export interface LogoutView extends MessageView {
     clearUserInfo: () => void;
 }
-export class LogoutPresenter extends Presenter {
+export class LogoutPresenter extends Presenter<LogoutView> {
     private userService: UserService;
 
     public constructor(view: LogoutView) {
         super(view);
         this.userService = new UserService();
-    }
-
-    public get view(): LogoutView {
-      return super.view as LogoutView;
     }
 
     public async logOut (authToken: AuthToken | null) {

@@ -12,7 +12,7 @@ export interface LoginView extends View {
     ) => void
 }
 
-export class LoginPresenter extends Presenter {
+export class LoginPresenter extends Presenter<LoginView> {
     private _navigate:NavigateFunction = useNavigate();
     private userService: UserService;
 
@@ -20,10 +20,6 @@ export class LoginPresenter extends Presenter {
         super(view);
         this.userService = new UserService();
     }
-
-    public get view(): LoginView {
-        return super.view as LoginView;
-      }
 
     protected get navigate() {
         return this._navigate;

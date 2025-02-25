@@ -7,16 +7,12 @@ export interface FollowerCountView extends View{
     displayErrorMessage: (message: string, bootstrapClasses?: string) => void;
 }
 
-export class FollowerCountPresenter extends Presenter {
+export class FollowerCountPresenter extends Presenter<FollowerCountView> {
     private followService: FollowService;
 
     public constructor(view: FollowerCountView) {
         super(view);
         this.followService = new FollowService();
-    }
-
-    public get view(): FollowerCountView {
-      return super.view as FollowerCountView;
     }
 
     public async setNumbFollowers (
