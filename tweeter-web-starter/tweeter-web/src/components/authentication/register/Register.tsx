@@ -20,7 +20,6 @@ const Register = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const navigate = useNavigate();
   const { updateUserInfo } = userInfoHook();
   const { displayErrorMessage } = useToastListener();
 
@@ -43,62 +42,30 @@ const Register = () => {
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    handleImageFile(file);
-  };
-
-  const handleImageFile = (file: File | undefined) => {
-    if (file) {
-      setImageUrl(URL.createObjectURL(file));
-
-      const reader = new FileReader();
-      reader.onload = (event: ProgressEvent<FileReader>) => {
-        const imageStringBase64 = event.target?.result as string;
-
-        // Remove unnecessary file metadata from the start of the string.
-        const imageStringBase64BufferContents =
-          imageStringBase64.split("base64,")[1];
-
-        const bytes: Uint8Array = Buffer.from(
-          imageStringBase64BufferContents,
-          "base64"
-        );
-
-        setImageBytes(bytes);
-      };
-      reader.readAsDataURL(file);
-
-      // Set image file extension (and move to a separate method)
-      const fileExtension = getFileExtension(file);
-      if (fileExtension) {
-        setImageFileExtension(fileExtension);
-      }
-    } else {
-      setImageUrl("");
-      setImageBytes(new Uint8Array());
-    }
-  };
-
-  const getFileExtension = (file: File): string | undefined => {
-    return file.name.split(".").pop();
+    presenter.handleImageFile(file);
   };
 
   const listener: RegisterView = {
     updateUserInfo: updateUserInfo,
     displayErrorMessage: displayErrorMessage,
-    firstName: firstName,
-    lastName: lastName,
-    alias: alias,
-    password: password,
-    imageBytes: imageBytes,
-    imageFileExtension: imageFileExtension,
-    rememberMe: rememberMe
+    setImageBytes: setImageBytes,
+    setImageFileExtension: setImageFileExtension,
+    setImageUrl: setImageUrl
   }
 
   const presenter = new RegisterPresenter(listener);
 
   const doRegister = async () => {
       setIsLoading(true);
-      presenter.doRegister();
+      presenter.doRegister(
+        firstName,
+        lastName,
+        alias,
+        password,
+        imageBytes,
+        imageFileExtension,
+        rememberMe,
+      );
       setIsLoading(false);
   };
 

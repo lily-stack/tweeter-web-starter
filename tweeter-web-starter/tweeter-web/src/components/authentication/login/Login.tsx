@@ -29,24 +29,20 @@ const Login = (props: Props) => {
 
   const loginOnEnter = (event: React.KeyboardEvent<HTMLElement>) => {
     if (event.key == "Enter" && !checkSubmitButtonStatus()) {
-      presenter.doLogin();
+      doLogin();
     }
   };
 
   const listener: LoginView = {
     updateUserInfo: updateUserInfo,
     displayErrorMessage: displayErrorMessage,
-    originalUrl: props.originalUrl,
-    alias: alias,
-    password: password,
-    rememberMe: rememberMe
   }
 
   const [presenter] = useState(props.presenterGenerator(listener));
 
   const doLogin = () => {
     setIsLoading(true);
-    presenter.doLogin();
+    presenter.doLogin(props.originalUrl, alias, password, rememberMe);
     setIsLoading(false);
   }
 

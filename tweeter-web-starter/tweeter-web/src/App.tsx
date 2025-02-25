@@ -19,8 +19,7 @@ import { FollowerPresenter } from "./presenters/FollowerPresenter";
 import { StatusItemView } from "./presenters/StatusItemPresenter";
 import { FeedPresenter } from "./presenters/FeedPresenter";
 import { StoryPresenter } from "./presenters/StoryPresenter";
-import { LoginView } from "./presenters/LoginPresenter";
-import { LoginNoUrlPresenter } from "./presenters/LoginNoUrlPresenter";
+import { LoginPresenter, LoginView } from "./presenters/LoginPresenter";
 
 const App = () => {
   const { currentUser, authToken } = userInfoHook();
@@ -102,7 +101,7 @@ const UnauthenticatedRoutes = () => {
         path="/login" 
         element={
           <Login 
-            presenterGenerator={(view:LoginView) => new LoginNoUrlPresenter(view)}
+            presenterGenerator={(view:LoginView) => new LoginPresenter(view)}
           />
         } 
       />
@@ -110,7 +109,7 @@ const UnauthenticatedRoutes = () => {
       <Route path="*" element={
         <Login 
           originalUrl={location.pathname} 
-          presenterGenerator={(view:LoginView) => new LoginNoUrlPresenter(view)}
+          presenterGenerator={(view:LoginView) => new LoginPresenter(view)}
         />} />
     </Routes>
   );
