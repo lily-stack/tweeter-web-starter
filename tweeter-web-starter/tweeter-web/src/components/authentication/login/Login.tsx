@@ -6,12 +6,13 @@ import AuthenticationFormLayout from "../AuthenticationFormLayout";
 import useToastListener from "../../toaster/ToastListenerHook";
 import AuthenticationFields from "../AuthenticationFields";
 import userInfoHook from "../../userInfo/UserInfoHook";
-import { LoginPresenter, LoginView } from "../../../presenters/LoginPresenter";
+import { LoginPresenter } from "../../../presenters/LoginPresenter";
+import { AuthenticationView } from "../../../presenters/Presenter";
 
 
 interface Props {
   originalUrl?: string;
-  presenterGenerator: (view: LoginView) => LoginPresenter;
+  presenterGenerator: (view: AuthenticationView) => LoginPresenter;
 }
 
 const Login = (props: Props) => {
@@ -33,7 +34,7 @@ const Login = (props: Props) => {
     }
   };
 
-  const listener: LoginView = {
+  const listener: AuthenticationView = {
     updateUserInfo: updateUserInfo,
     displayErrorMessage: displayErrorMessage,
   }

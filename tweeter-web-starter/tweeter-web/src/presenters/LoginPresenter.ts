@@ -1,28 +1,12 @@
-import { NavigateFunction, useNavigate } from "react-router-dom";
-import { User, AuthToken } from "tweeter-shared"
 import { UserService } from "../model/service/UserService";
-import { Presenter, View } from "./Presenter";
+import { AuthenticationView, Presenter } from "./Presenter";
 
-export interface LoginView extends View {
-    updateUserInfo: (
-        user: User,
-        user2: User,
-        authToken: AuthToken,
-        rememberMe: boolean
-    ) => void
-}
-
-export class LoginPresenter extends Presenter<LoginView> {
-    private _navigate:NavigateFunction = useNavigate();
+export class LoginPresenter extends Presenter<AuthenticationView> {
     private userService: UserService;
 
-    public constructor(view: LoginView) {
+    public constructor(view: AuthenticationView) {
         super(view);
         this.userService = new UserService();
-    }
-
-    protected get navigate() {
-        return this._navigate;
     }
 
     public async doLogin (
@@ -32,18 +16,12 @@ export class LoginPresenter extends Presenter<LoginView> {
         rememberMe: boolean,
     ) {
         this.doFailureReportingOperation( async () => {
-            const [user, authToken] = await this.userService.login(
-                alias, 
-                password
-              );
-        
-              this.view.updateUserInfo(user, user, authToken, rememberMe);
-    
-                if (originalUrl) {
-                    this.navigate(originalUrl!);
-                } else {
-                    this.navigate("/");
-                }
-        }, "log user in");
+              this.doAuthenticationOperation( () => 
+                this.userService.login(
+                    alias, 
+                    password
+                ), this.view, rememberMe);
+              this.navigation(originalUrl);
+            }, "log user in");
+        };
     }
-}
