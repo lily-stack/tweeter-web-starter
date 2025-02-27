@@ -47,7 +47,7 @@ describe("LogoutPresenter", () => {
     it("displays error message and does not clear the last info message, clears the user info, and navigates to the login page", async () => {
         const error = new Error("An error occurred");
         when(mockUserService.logout(authToken)).thenThrow(error);
-        
+
         await logoutPresenter.logOut(authToken);
 
         verify(mockLogoutPresenterView.displayErrorMessage("Failed to log user out because of exception: An error occurred")).once();
