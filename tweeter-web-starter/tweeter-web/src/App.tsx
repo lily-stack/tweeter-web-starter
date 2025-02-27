@@ -18,11 +18,11 @@ import { StatusItemView } from "./presenters/StatusItemPresenter";
 import { FeedPresenter } from "./presenters/FeedPresenter";
 import { StoryPresenter } from "./presenters/StoryPresenter";
 import { LoginPresenter } from "./presenters/LoginPresenter";
-import { AuthenticationView } from "./presenters/Presenter";
 import ItemScroller from "./components/mainLayout/ItemScroller";
 import { Status, User } from "tweeter-shared";
 import StatusItem from "./components/statusItem/StatusItem";
 import UserItem from "./components/userItem/UserItem";
+import { AuthenticationView } from "./presenters/AuthenticationPresenter";
 
 const App = () => {
   const { currentUser, authToken } = userInfoHook();

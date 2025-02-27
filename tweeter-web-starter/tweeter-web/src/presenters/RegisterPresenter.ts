@@ -1,7 +1,7 @@
-import { User, AuthToken } from "tweeter-shared";
+
 import { UserService } from "../model/service/UserService";
 import { Buffer } from "buffer";
-import { AuthenticationView, Presenter } from "./Presenter";
+import { AuthenticationPresenter, AuthenticationView } from "./AuthenticationPresenter";
 
 export interface RegisterView extends AuthenticationView {
     setImageBytes: React.Dispatch<React.SetStateAction<Uint8Array>>
@@ -9,7 +9,7 @@ export interface RegisterView extends AuthenticationView {
     setImageFileExtension: React.Dispatch<React.SetStateAction<string>>
 }
 
-export class RegisterPresenter extends Presenter<RegisterView> {
+export class RegisterPresenter extends AuthenticationPresenter<RegisterView> {
     private userService: UserService;
 
     public constructor(view: RegisterView) {
