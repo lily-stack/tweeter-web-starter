@@ -11,6 +11,7 @@ import { AuthenticationView } from "../../../presenters/AuthenticationPresenter"
 
 interface Props {
   originalUrl?: string;
+  presenter?: LoginPresenter;
   presenterGenerator: (view: AuthenticationView) => LoginPresenter;
 }
 

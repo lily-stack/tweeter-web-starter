@@ -14,14 +14,15 @@ export class UnfollowUserPresenter extends DisplayUserPresenter {
         event.preventDefault();
         this.doFailureReportingOperation( async () => {
           this.view.setIsLoading(true);
-            this.view.displayInfoMessage(
-              `Unfollowing ${displayedUser!.name}...`,
-              0
-            );
       
             const [followerCount, followeeCount] = await this.followService.unfollow(
               authToken!,
               displayedUser!
+            );
+
+            this.view.displayInfoMessage(
+              `Unfollowing ${displayedUser!.name}...`,
+              2000
             );
       
             this.view.setIsFollower(false);

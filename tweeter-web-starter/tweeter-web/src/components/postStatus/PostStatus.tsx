@@ -36,6 +36,7 @@ const PostStatus = () => {
       <form>
         <div className="form-group mb-3">
           <textarea
+            aria-label="postStatus text"
             className="form-control"
             id="postStatusTextArea"
             rows={10}
@@ -50,6 +51,7 @@ const PostStatus = () => {
           <button
             id="postStatusButton"
             className="btn btn-md btn-primary me-1"
+            aria-label="Post Status"
             type="button"
             disabled={checkButtonStatus()}
             style={{ width: "8em" }}
@@ -69,6 +71,7 @@ const PostStatus = () => {
             id="clearStatusButton"
             className="btn btn-md btn-secondary"
             type="button"
+            aria-label="Clear"
             disabled={checkButtonStatus()}
             onClick={(event) => clearPost(event)}
           >

@@ -1,6 +1,6 @@
 import { AuthToken, User } from "tweeter-shared";
 import { FollowService } from "../model/service/FollowService";
-import { Presenter, View } from "./Presenter";
+import { MessageView, Presenter, View } from "./Presenter";
 
 export interface FollowerCountView extends View{
     setFollowerCount: (value: React.SetStateAction<number>) => void;

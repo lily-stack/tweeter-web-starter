@@ -19,7 +19,9 @@ const UserInfo = () => {
 
   const { displayErrorMessage, displayInfoMessage, clearLastInfoMessage } =
     useToastListener();
-
+  console.log("made it past toast", displayInfoMessage);
+  console.log("test", displayErrorMessage);
+  console.log("last", clearLastInfoMessage);
   const { currentUser, authToken, displayedUser, setDisplayedUser } =
     userInfoHook();
 
@@ -42,7 +44,7 @@ const UserInfo = () => {
 
  const FolloweeCountListener: FolloweeCountView = {
     setFolloweeCount: setFolloweeCount,
-    displayErrorMessage: displayErrorMessage
+    displayErrorMessage: displayErrorMessage,
  }
 
  const followeeCountPresenter = new FolloweeCountPresenter(FolloweeCountListener);
