@@ -1,0 +1,6 @@
+BUCKET='340tweeterlh'
+LAMBDA_ROLE='arn:aws:iam::851725265013:role/TweeterServerRole'
+EDIT_LAMBDALIST='
+tweeterGetFollowees | lambda/follow/GetFolloweesLambda.handler
+'
+LAMBDALAYER_ARN='arn:aws:lambda:us-west-2:851725265013:layer:tweeterLambdaLayer:2'
