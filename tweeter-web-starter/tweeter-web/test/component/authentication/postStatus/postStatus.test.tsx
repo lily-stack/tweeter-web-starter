@@ -82,7 +82,7 @@ describe("PostStatusComponent", () => {
 
         await user.click(postStatusButton);
 
-        verify(mockPresenter.submitPost(event, authToken, currentUser, post))
+        verify(mockPresenter.submitPost(event, authToken, currentUser, post)).once()
 
         
     })

@@ -60,7 +60,7 @@ describe("LoginCpmonent", () => {
 
         await user.click(signInButton);
 
-        verify(mockPresenter.doLogin(originalUrl, alias, password, rememberMe))
+        verify(mockPresenter.doLogin(originalUrl, alias, password, rememberMe)).once()
 
         
     });
