@@ -19,9 +19,6 @@ const UserInfo = () => {
 
   const { displayErrorMessage, displayInfoMessage, clearLastInfoMessage } =
     useToastListener();
-  console.log("made it past toast", displayInfoMessage);
-  console.log("test", displayErrorMessage);
-  console.log("last", clearLastInfoMessage);
   const { currentUser, authToken, displayedUser, setDisplayedUser } =
     userInfoHook();
 
