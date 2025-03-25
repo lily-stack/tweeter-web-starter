@@ -3,6 +3,6 @@ import { UserDto } from "../../dto/UserDto";
 import { TweeterResponse } from "./TweeterResponse";
 
 export interface AuthenticationResponse extends TweeterResponse {
-	checkedUser: UserDto,
-	authToken: AuthToken
+	readonly checkedUser: UserDto,
+	readonly authToken: AuthToken
 }
