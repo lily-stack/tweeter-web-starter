@@ -16,13 +16,14 @@ import {
   
     private clientCommunicator = new ClientCommunicator(this.SERVER_URL);
   
-    public async getMoreFollowees(
-      request: PagedUserItemRequest
+    public async getMoreFollows(
+      request: PagedUserItemRequest,
+      path: string
     ): Promise<[User[], boolean]> {
       const response = await this.clientCommunicator.doPost<
         PagedUserItemRequest,
         PagedUserItemResponse
-      >(request, "/followee/list");
+      >(request, path);
   
       // Convert the UserDto array returned by ClientCommunicator to a User array
       const items: User[] | null =
@@ -33,7 +34,7 @@ import {
       // Handle errors    
       if (response.success) {
         if (items == null) {
-          throw new Error(`No followees found`);
+          throw new Error(`No followers or followees found`);
         } else {
           return [items, response.hasMore];
         }
