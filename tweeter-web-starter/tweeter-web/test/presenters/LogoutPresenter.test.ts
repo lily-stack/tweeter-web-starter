@@ -2,6 +2,7 @@ import { AuthToken } from "tweeter-shared";
 import { LogoutPresenter, LogoutView } from "../../src/presenters/LogoutPresenter"
 import { capture, instance, mock, spy, verify, when } from "@typestrong/ts-mockito"
 import { UserService } from "../../src/model/service/UserService";
+import "isomorphic-fetch";
 describe("LogoutPresenter", () => {
     let mockLogoutPresenterView = mock<LogoutView>();
     let logoutPresenter: LogoutPresenter;

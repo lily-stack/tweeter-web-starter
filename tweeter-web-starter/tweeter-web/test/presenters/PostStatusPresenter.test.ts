@@ -3,6 +3,7 @@ import { PostStatusPresenter, PostStatusView } from "../../src/presenters/PostSt
 import { anything, capture, instance, mock, spy, verify, when } from "@typestrong/ts-mockito";
 import { StatusService } from "../../src/model/service/StatusService";
 import { MouseEvent as ReactMouseEvent } from "react";
+import "isomorphic-fetch";
 
 describe("PostStatusPresenter", () => {
     let mockPostStatusPresenterView = mock<PostStatusView>();
