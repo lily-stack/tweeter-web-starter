@@ -15,7 +15,7 @@ export class StatusService {
             token: authToken.token,
             userAlias: userAlias,
             pageSize: pageSize,
-            lastItem: lastItem
+            lastItem: lastItem ? lastItem.dto : null
           }, "/story/list"
         );
     };
@@ -32,7 +32,7 @@ export class StatusService {
             token: authToken.token,
             userAlias: userAlias,
             pageSize: pageSize,
-            lastItem: lastItem
+            lastItem: lastItem ? lastItem.dto : null
           }, "/feed/list"
         );
     };

@@ -15,7 +15,7 @@ export class FollowService {
           token: authToken.token,
           userAlias: userAlias,
           pageSize: pageSize,
-          lastItem: lastItem
+          lastItem: lastItem ? lastItem.dto : null
         }, "/follower/list"
       );
       };
@@ -32,7 +32,7 @@ export class FollowService {
           token: authToken.token,
           userAlias: userAlias,
           pageSize: pageSize,
-          lastItem: lastItem
+          lastItem: lastItem ? lastItem.dto : null
         }, "/followee/list"
       );
       };

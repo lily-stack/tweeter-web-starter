@@ -17,11 +17,21 @@ export type {PagedUserItemRequest} from "./model/net/request/PagedUserItemReques
 export type {TweeterRequest} from "./model/net/request/TweeterRequest"
 export type {PagedStatusItemRequest} from "./model/net/request/PagedStatusItemRequest"
 export type {PostStatusRequest} from "./model/net/request/PostStatusRequest"
+export type { GetUserRequest } from "./model/net/request/GetUserRequest"
+export type { RegisterRequest } from "./model/net/request/RegisterRequest"
+export type { AuthenticationRequest } from "./model/net/request/AuthenticationRequest"
+export type { FollowRequest } from "./model/net/request/FollowRequest"
+export type { IsFollowerRequest } from "./model/net/request/IsFollowerRequest"
 
 //responses
 export type { PagedUserItemResponse} from "./model/net/response/PagedUserItemResponse"
 export type { TweeterResponse } from "./model/net/response/TweeterResponse"
 export type { PagedStatusItemResponse} from "./model/net/response/PagedStatusItemResponse"
+export type { GetUserResponse } from "./model/net/response/GetUserResponse"
+export type { AuthenticationResponse } from "./model/net/response/AuthenticationResponse"
+export type { FollowResponse } from "./model/net/response/FollowResponse"
+export type { FollowCountResponse } from "./model/net/response/FollowCountResponse"
+export type { IsFollowerResponse } from "./model/net/response/IsFollowerResponse"
 
 //Other
 export { FakeData } from "./util/FakeData";
